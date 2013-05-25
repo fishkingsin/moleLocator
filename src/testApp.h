@@ -4,6 +4,22 @@
 #include "ofxXmlSettings.h"
 #include "ofxUI.h"
 #include "ofxDraggable.h"
+class Draggable :public ofxDraggable
+{
+    public :
+    void draw()
+    {
+        ofPushStyle();
+        ofNoFill();
+        ofSetColor(255,0,0);
+        ofDrawBitmapString(_id, x+width*0.5,y+height*0.5);
+        ofPopStyle();
+        ofPushStyle();
+        ofxDraggable::draw();
+        ofPopStyle();        
+    }
+    string _id;
+};
 class testApp : public ofBaseApp{
 
 	public:
@@ -28,6 +44,7 @@ class testApp : public ofBaseApp{
     
     ofxXmlSettings defaultXML;
     string originalFileExtension,originalFileBaseName;
-    vector<ofxDraggable*> draggable;
-    
+    vector<Draggable*> draggable;
+    ofImage mole;
+    string filepath;
 };
